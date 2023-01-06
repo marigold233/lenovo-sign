@@ -5,7 +5,10 @@ ua = ""
 [account]
 # 你的手机号对应你的密码，必须填，别忘记去掉”#“
 # 177777777 = "密码"
-os.environ['ACCOUNTS']
+# os.environ['ACCOUNTS']
+env = [
+"ACCOUNTS"
+]
 
 [cookies]
 
