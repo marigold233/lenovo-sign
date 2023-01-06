@@ -7,21 +7,32 @@ ua = ""
 # 177777777 = "密码"
 # os.environ['ACCOUNTS']
 env = [
-"ACCOUNTS"
+  "ACCOUNTS = ACCOUNTS"
 ]
 
 [cookies]
 
 [message_push.Server_chan]
 # server酱推送
-send_key = os.environ['SERVER_KEY']
+# send_key = os.environ['SERVER_KEY']
+env = [
+  "send_key = SERVER_KEY"
+]
 
 [message_push.Wechat_message]
 # 微信企业消息
-corpid = os.environ['WM_pid']
-corpsecret = os.environ['WM_pst']
-agentid = os.environ['WM_aid']
+# corpid = os.environ['WM_pid']
+# corpsecret = os.environ['WM_pst']
+# agentid = os.environ['WM_aid']
+env = [
+  "corpid = WM_pid",
+  "corpsecret = WM_pst",
+  "agentid = WM_aid"
+]
 
 [message_push.Dingtalk_message]
 # 钉钉推送
-access_token = os.environ['DING_KEY']
+# access_token = os.environ['DING_KEY']
+env = [
+  "access_token = DING_KEY"
+]
