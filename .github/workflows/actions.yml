@@ -1,0 +1,40 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Auto clock in
+
+on:
+#  push:  #有push操作就会更新
+#    branches: [ main ]   #若push的main更新就会自动执行一次
+  schedule:
+    - cron: '0 1,2 * * *' # 设置定时任务
+  # 允许用于在 `Actions` 标签页中手动运行工作流
+  workflow_dispatch:
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pipreqs
+        pipreqs .
+        pip install -r requirements.txt
+    - name: 'signin'
+      env:
+        ACCOUNTS: ${{ secrets.ACCOUNTS }}
+        SERVER_KEY: ${{ secrets.SERVER_KEY }}
+        WM_pid: ${{ secrets.WM_PID }}
+        WM_pst: ${{ secrets.WM_PST }}
+        WM_aid: ${{ secrets.WM_AID }}
+        DING_KEY: ${{ secrets.DING_KEY }}
+      run: python lenovo_sign.py
+      
+    - uses: gautamkrishnar/keepalive-workflow@master # using the workflow with default settings
